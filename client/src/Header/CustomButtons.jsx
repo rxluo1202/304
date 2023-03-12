@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { makeStyles, Box, Typography, Badge, Button } from '@material-ui/core';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import { ShoppingCart } from '@material-ui/icons';
-// import LoginDialog from '../Login/LoginDialog';
+import LoginDialog from './LoginDialog';
 import { LoginContext } from '../context/ContextProvider';
 import { useSelector } from 'react-redux';
 import Profile from './Profile';
@@ -90,7 +90,7 @@ const CustomButtons = () => {
                 </Badge>
                 <Typography style={{ marginLeft: 10 }}>Cart</Typography>
             </Link>
-            {/* <LoginDialog open={open} setOpen={setOpen} setAccount={setAccount} /> */}
+            { <LoginDialog open={open} setOpen={setOpen} setAccount={setAccount} /> }
         </Box>
     )
 }
