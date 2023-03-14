@@ -5,8 +5,6 @@ import {
   Button,
   Divider,
 } from "@material-ui/core";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import AppDialog from "../AppDialog/AppDialog";
