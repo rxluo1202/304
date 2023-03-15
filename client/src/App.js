@@ -1,11 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Header from "./Header/Header";
-import Slide from "./Jobs/Slide";
+import Header from "./Components/Header/Header";
+import { Box, makeStyles } from '@material-ui/core';
 import TemplateProvider from "./templates/TemplateProvider";
 import ContextProvider from "./context/ContextProvider";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import jobs from "./jobs.json";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Components/Home";
+import Myinfo from "./Components/Info/Myinfo";
 
 function App() {
   return (
@@ -13,7 +13,12 @@ function App() {
       <ContextProvider>
         <BrowserRouter>
           <Header />
-          <Slide data={jobs} multi={true} />
+            <Box style={{marginTop: 54}}>
+              <Routes>
+                <Route exact path= '/' element={<Home/>} />
+                <Route path= '/myinfo' element={<Myinfo/>} />
+              </Routes>
+            </Box>
         </BrowserRouter>
       </ContextProvider>
     </TemplateProvider>

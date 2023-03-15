@@ -96,13 +96,8 @@ const Header = () => {
                 </Drawer>
 
                 <Link to='/' className={classes.component}>
-                    <img src={logoURL} className={classes.logo} alt="" />
-                    <Box component="span" className={classes.container}>
-                        <Typography className = {classes.subHeading}>Explore <Box component="span" style={{color:'#FFE500'}}>Plus</Box></Typography>
-                        <img src={subURL} className={classes.subURL} alt="" />
-                    </Box>
                 </Link>
-                <Search />
+                {/* <Search /> */}
                 <span className={classes.customButtons}><CustomButtons /></span>
             </ToolBar>
         </AppBar>

@@ -1,0 +1,45 @@
+import { Box, makeStyles } from '@material-ui/core';
+import Slide from './Jobs/Slide';
+import jobs from "../jobs.json";
+import React,  { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'; // hooks
+import { getProducts as listProducts } from '../redux/actions/productActions';
+// import { navData } from '../constant/data';
+
+
+const useStyle = makeStyles({
+    component: {
+        padding: 10,
+        background: '#F2F2F2'
+    }
+})
+
+const Home = () => {
+    const classes = useStyle();
+
+    // const getProducts = useSelector(state => state.getProducts);
+    // const { products} = getProducts;
+
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     dispatch(listProducts())
+    // }, [dispatch])
+
+    console.log("jjjjjjjjjjjjjjjjobs")
+    for (var i = 0; i < jobs.length; i++) {
+        console.log(jobs[i])
+    }
+    
+
+
+    return (
+        <>
+            <Box>
+                <Slide data={jobs} multi={true} />
+            </Box>
+        </>
+    )
+}
+
+export default Home;

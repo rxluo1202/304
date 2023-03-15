@@ -3,7 +3,7 @@ import { makeStyles, Box, Typography, Badge, Button } from '@material-ui/core';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import { ShoppingCart } from '@material-ui/icons';
 import LoginDialog from './LoginDialog';
-import { LoginContext } from '../context/ContextProvider';
+import { LoginContext } from '../../context/ContextProvider';
 import { useSelector } from 'react-redux';
 import Profile from './Profile';
 
@@ -84,12 +84,6 @@ const CustomButtons = () => {
                     <Button className={classes.login} variant="contained" onClick={() => openDialog() }>Login</Button>
                 </Link>
             }
-            <Link to='/cart' className={classes.container}>
-                <Badge badgeContent={cartItems?.length} color="secondary">
-                    <ShoppingCart />
-                </Badge>
-                <Typography style={{ marginLeft: 10 }}>Cart</Typography>
-            </Link>
             { <LoginDialog open={open} setOpen={setOpen} setAccount={setAccount} /> }
         </Box>
     )

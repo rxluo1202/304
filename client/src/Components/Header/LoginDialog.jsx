@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, TextField, Box, Button, makeStyles, Typography } from '@material-ui/core';
-import { authenticateLogin, authenticateSignup } from '../service/api';
+import { authenticateLogin, authenticateSignup } from '../../service/api';
 
 const useStyle = makeStyles({
     component: {
@@ -98,6 +98,12 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
     const [ error, showError] = useState(false);
     const [ account, toggleAccount ] = useState(accountInitialValues.login);
 
+    const [selectedOption, setSelectedOption] = useState('Employer');
+
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value);
+    }
+
     useEffect(() => {
         showError(false);
     }, [login])
@@ -164,6 +170,28 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
                             <TextField onChange={(e) => onInputChange(e)} name='email' label='Enter Email' />
                             <TextField onChange={(e) => onInputChange(e)} name='password' label='Enter Password' />
                             <TextField onChange={(e) => onInputChange(e)} name='phone' label='Enter Phone' />
+                            <div style={{ display: "flex", flexDirection: "row" }}>
+                            <label>
+                                <input
+                                type="radio"
+                                name="options"
+                                value="Employer"
+                                checked={selectedOption === 'Employer'}
+                                onChange={handleOptionChange}
+                                />
+                                Employer
+                            </label>
+                            <label>
+                                <input
+                                type="radio"
+                                name="options"
+                                value="Employee"
+                                checked={selectedOption === 'Employee'}
+                                onChange={handleOptionChange}
+                                />
+                                Employee
+                            </label>
+                            </div>
                             <Button className={classes.loginbtn} onClick={() => signupUser()} >Continue</Button>
                         </Box>
                     }
