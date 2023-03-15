@@ -70,7 +70,10 @@ const appInitialValues = {
     username: '',
     email: '',
     time: '',
-    phone:''
+    phone:'',
+    supportingdocument:'',
+    intro: '',
+    ctime: ''
 }
 
 const HomeDialog = ({ open, setOpen, setApplication}) => {
@@ -102,6 +105,9 @@ const HomeDialog = ({ open, setOpen, setApplication}) => {
                             <TextField onChange={(e) => onInputChange(e)} name='email' label='Enter Email' />
                             <TextField onChange={(e) => onInputChange(e)} name='time' label='Enter Time' />
                             <TextField onChange={(e) => onInputChange(e)} name='phone' label='Enter Phone' />
+                            <TextField onChange={(e) => onInputChange(e)} name='supportingdocument' label='Enter Supporting Document Name' />
+                            <TextField onChange={(e) => onInputChange(e)} name='intro' label='Enter Application Introduction' />
+                            <TextField onChange={(e) => onInputChange(e)} name='ctime' label='Completion date' />
                             <Button className={classes.loginbtn} onClick={() => submitApplication()} >Apply</Button>
                         </Box>
                     }

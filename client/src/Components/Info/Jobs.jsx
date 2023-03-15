@@ -4,6 +4,8 @@ import React,  { useEffect ,useContext} from 'react';
 import { useSelector, useDispatch } from 'react-redux'; // hooks
 import { getSellerProducts as gSP } from '../../redux/actions/productActions';
 import { LoginContext } from '../../context/ContextProvider';
+import JobSlide from '../Slides/JobSlide';
+import jobs from "../../jobs.json";
 
 const useStyle = makeStyles({
     component: {
@@ -31,14 +33,7 @@ const Jobs = () => {
 
     return (
         <> 
-            <h1>Jobs</h1>
-            {/* <Box className={classes.component}>
-                <Slide
-                    data={products} 
-                    timer={false} 
-                    multi={true} 
-                />
-            </Box> */}
+            <JobSlide data={jobs} multi={true}/>
         </>
     )
    
