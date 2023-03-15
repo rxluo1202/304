@@ -1,5 +1,5 @@
 import { Box, makeStyles } from '@material-ui/core';
-import Slide from './Jobs/Slide';
+import HomeSlide from './Slides/HomeSlide';
 import jobs from "../jobs.json";
 import React,  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; // hooks
@@ -36,7 +36,7 @@ const Home = () => {
     return (
         <>
             <Box>
-                <Slide data={jobs} multi={true} />
+                <HomeSlide data={jobs} multi={true} />
             </Box>
         </>
     )

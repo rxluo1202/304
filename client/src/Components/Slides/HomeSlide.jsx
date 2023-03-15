@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import AppDialog from "../AppDialog/AppDialog";
+import HomeDialog from "../Dialogs/HomeDialog";
 
 const responsive = {
   desktop: {
@@ -63,7 +63,7 @@ const MultiSlide = ({ data }) => {
 
   const [open, setOpen] = useState(false);
 
-  const openAppDialog = () => {
+  const openHomeDialog = () => {
     setOpen(true);
   };
 
@@ -123,18 +123,18 @@ const MultiSlide = ({ data }) => {
           >
             {temp.salaryType}
           </Typography>
-          <Button variant="contained" onClick={() => openAppDialog()}>
+          <Button variant="contained" onClick={() => openHomeDialog()}>
             Apply
           </Button>
-          <AppDialog open={open} setOpen={setOpen} />
+          <HomeDialog open={open} setOpen={setOpen} />
         </Box>
       ))}
     </Box>
   );
 };
 
-const Slide = (props) => {
+const HomeSlide = (props) => {
   return <>{props.multi === true ? <MultiSlide {...props} /> : ""}</>;
 };
 
-export default Slide;
+export default HomeSlide;

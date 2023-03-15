@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { makeStyles, Box, Typography, Badge, Button } from '@material-ui/core';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import { ShoppingCart } from '@material-ui/icons';
-import LoginDialog from './LoginDialog';
+import LoginDialog from '../Dialogs/LoginDialog';
 import { LoginContext } from '../../context/ContextProvider';
 import { useSelector } from 'react-redux';
 import Profile from './Profile';

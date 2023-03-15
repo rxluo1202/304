@@ -73,7 +73,7 @@ const appInitialValues = {
     phone:''
 }
 
-const AppDialog = ({ open, setOpen, setApplication}) => {
+const HomeDialog = ({ open, setOpen, setApplication}) => {
     const classes = useStyle();
     const [ input, setInput ] = useState(appInitialValues);
 
@@ -111,4 +111,4 @@ const AppDialog = ({ open, setOpen, setApplication}) => {
     )
 }
 
-export default AppDialog;
+export default HomeDialog;
