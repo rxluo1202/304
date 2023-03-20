@@ -67,6 +67,18 @@ const MultiSlide = ({ data }) => {
     setOpen(true);
   };
 
+  const handleUpdate = () => {
+    console.log("update!");
+  };
+
+  const handleDelete = () => {
+    console.log("delete!");
+  };
+
+  const viewEmail = () => {
+    console.log("view email!");
+  };
+
   return (
     <Box className={classes.component}>
       {data.map((temp) => (
@@ -76,53 +88,64 @@ const MultiSlide = ({ data }) => {
             className={classes.text}
             style={{ fontWeight: 600, color: "#212121" }}
           >
+            Job id:
+            {temp.jobID}
+          </Typography>
+          <Typography
+            className={classes.text}
+            style={{ fontWeight: 600, color: "#212121" }}
+          >
+            Job name:
             {temp.jobName}
           </Typography>
           <Typography className={classes.text} style={{ color: "green" }}>
+            Industry:
             {temp.industry}
           </Typography>
           <Typography
             className={classes.text}
             style={{ color: "#212121", opacity: ".6" }}
           >
-            {temp.endDate}
-          </Typography>
-          <Typography
-            className={classes.text}
-            style={{ color: "#212121", opacity: ".6" }}
-          >
+            Post date:
             {temp.postDate}
           </Typography>
           <Typography
             className={classes.text}
             style={{ color: "#212121", opacity: ".6" }}
           >
+            End date:
+            {temp.endDate}
+          </Typography>
+          {/* <Typography
+            className={classes.text}
+            style={{ color: "#212121", opacity: ".6" }}
+          >
+            Holiday:
             {temp.holiday}
           </Typography>
           <Typography
             className={classes.text}
             style={{ color: "#212121", opacity: ".6" }}
           >
-            {temp.training}
-          </Typography>
-          <Typography
-            className={classes.text}
-            style={{ color: "#212121", opacity: ".6" }}
-          >
-            {temp.allowance}
-          </Typography>
-          <Typography
-            className={classes.text}
-            style={{ color: "#212121", opacity: ".6" }}
-          >
+            Salary:
             {temp.salary}
           </Typography>
           <Typography
             className={classes.text}
             style={{ color: "#212121", opacity: ".6" }}
           >
+            Salary type:
             {temp.salaryType}
-          </Typography>
+          </Typography> */}
+          <Button variant="contained" onClick={() => handleUpdate()}>
+            update
+          </Button>
+          <Button variant="contained" onClick={() => handleDelete()}>
+            delete
+          </Button>
+          <Button variant="contained" onClick={() => viewEmail()}>
+            view applicant email
+          </Button>
           <JobDialog open={open} setOpen={setOpen} />
         </Box>
       ))}

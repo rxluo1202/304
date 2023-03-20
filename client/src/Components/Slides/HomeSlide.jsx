@@ -76,53 +76,35 @@ const MultiSlide = ({ data }) => {
             className={classes.text}
             style={{ fontWeight: 600, color: "#212121" }}
           >
+            Job id:
+            {temp.jobID}
+          </Typography>
+          <Typography
+            className={classes.text}
+            style={{ fontWeight: 600, color: "#212121" }}
+          >
+            Job name:
             {temp.jobName}
           </Typography>
           <Typography className={classes.text} style={{ color: "green" }}>
+            Industry:
             {temp.industry}
           </Typography>
           <Typography
             className={classes.text}
             style={{ color: "#212121", opacity: ".6" }}
           >
-            {temp.endDate}
-          </Typography>
-          <Typography
-            className={classes.text}
-            style={{ color: "#212121", opacity: ".6" }}
-          >
+            Post date:
             {temp.postDate}
           </Typography>
           <Typography
             className={classes.text}
             style={{ color: "#212121", opacity: ".6" }}
           >
-            {temp.holiday}
+            End date:
+            {temp.endDate}
           </Typography>
-          <Typography
-            className={classes.text}
-            style={{ color: "#212121", opacity: ".6" }}
-          >
-            {temp.training}
-          </Typography>
-          <Typography
-            className={classes.text}
-            style={{ color: "#212121", opacity: ".6" }}
-          >
-            {temp.allowance}
-          </Typography>
-          <Typography
-            className={classes.text}
-            style={{ color: "#212121", opacity: ".6" }}
-          >
-            {temp.salary}
-          </Typography>
-          <Typography
-            className={classes.text}
-            style={{ color: "#212121", opacity: ".6" }}
-          >
-            {temp.salaryType}
-          </Typography>
+
           <Button variant="contained" onClick={() => openHomeDialog()}>
             Apply
           </Button>

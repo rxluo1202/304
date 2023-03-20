@@ -1,8 +1,5 @@
 import React, { useState, useContext } from "react";
-import Interviews from "./Interviews";
 import Jobs from "./Jobs";
-import ItvsTemp from "./Interviews";
-import Applications from "./Applications";
 import {
   BrowserRouter as Router,
   Routes,
@@ -82,7 +79,7 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const Myinfo = () => {
-  const [activeTab, setActiveTab] = useState("Interviews");
+  const [activeTab, setActiveTab] = useState("Jobs");
 
   const { account, setAccount } = useContext(LoginContext);
 
@@ -92,14 +89,10 @@ const Myinfo = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "Interviews":
-        return <Interviews />;
-      case "Applications":
-        return <Applications />;
       case "Jobs":
         return <Jobs />;
       default:
-        return <Interviews />;
+        return <Jobs />;
     }
   };
 
@@ -107,18 +100,6 @@ const Myinfo = () => {
     <div className="App">
       <nav>
         <ul>
-          <li
-            onClick={() => handleClick("Interviews")}
-            className={activeTab === "Interviews" ? "active" : ""}
-          >
-            Interviews
-          </li>
-          <li
-            onClick={() => handleClick("Applications")}
-            className={activeTab === "Applications" ? "active" : ""}
-          >
-            Applications
-          </li>
           <li
             onClick={() => handleClick("Jobs")}
             className={activeTab === "Jobs" ? "active" : ""}

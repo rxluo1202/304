@@ -1,5 +1,6 @@
 [
     {
+        "jobID": "1",
         "postDate": "2023-4-2",
         "endDate": "2024-1-21",
         "jobName": "Software developer",
@@ -11,6 +12,7 @@
         "salaryType": "Monthly"
     },
     {
+        "jobID": "2",
         "postDate": "2023-4-2",
         "endDate": "2024-1-21",
         "jobName": "Software developer",
@@ -22,6 +24,7 @@
         "salaryType": "Monthly"
     },
     {
+        "jobID": "3",
         "postDate": "2023-4-2",
         "endDate": "2024-1-21",
         "jobName": "Software developer",
@@ -33,6 +36,7 @@
         "salaryType": "Monthly"
     },
     {
+        "jobID": "4",
         "postDate": "2023-4-2",
         "endDate": "2024-1-21",
         "jobName": "Software developer",
@@ -44,6 +48,7 @@
         "salaryType": "Monthly"
     },
     {
+        "jobID": "5",
         "postDate": "2023-4-2",
         "endDate": "2024-1-21",
         "jobName": "Software developer",
@@ -55,6 +60,7 @@
         "salaryType": "Monthly"
     },
     {
+        "jobID": "6",
         "postDate": "2023-4-2",
         "endDate": "2024-1-21",
         "jobName": "Software developer",
