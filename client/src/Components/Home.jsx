@@ -1,6 +1,7 @@
 import { Box, makeStyles } from '@material-ui/core';
 import HomeSlide from './Slides/HomeSlide';
 import jobs from "../jobs.json";
+import MostRecent from './Buttons/MostRecent';
 import React,  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; // hooks
 import { getProducts as listProducts } from '../redux/actions/productActions';
@@ -35,9 +36,10 @@ const Home = () => {
 
     return (
         <>
-            <Box>
+            <div className='App'>
+                <MostRecent />
                 <HomeSlide data={jobs} multi={true} />
-            </Box>
+            </div>
         </>
     )
 }

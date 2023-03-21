@@ -99,14 +99,14 @@ const Myinfo = () => {
   return (
     <div className="App">
       <nav>
-        <ul>
+        {/* <ul>
           <li
             onClick={() => handleClick("Jobs")}
             className={activeTab === "Jobs" ? "active" : ""}
           >
             Jobs
           </li>
-        </ul>
+        </ul> */}
       </nav>
       <div className="content">{renderTabContent()}</div>
     </div>

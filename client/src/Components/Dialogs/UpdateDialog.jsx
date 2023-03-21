@@ -91,7 +91,7 @@ const jobInitialValues = {
   salaryType: "",
 };
 
-const JobDialog = ({ jobID, open, setOpen, setJob }) => {
+const UpdateDialog = ({ jobID, open, setOpen, setJob }) => {
   const classes = useStyle();
   const [input, setInput] = useState(jobInitialValues);
 
@@ -99,7 +99,7 @@ const JobDialog = ({ jobID, open, setOpen, setJob }) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const submitJob = async () => {
+  const updateJob = async () => {
     //let response = await authenticateSignup(signup);
     //if(!response) return;
     handleClose();
@@ -166,8 +166,8 @@ const JobDialog = ({ jobID, open, setOpen, setJob }) => {
                 name="salaryType"
                 label="Enter salary type"
               /> */}
-              <Button className={classes.loginbtn} onClick={() => submitJob()}>
-                Submit
+              <Button className={classes.loginbtn} onClick={() => updateJob()}>
+                Update
               </Button>
             </Box>
           }
@@ -177,4 +177,4 @@ const JobDialog = ({ jobID, open, setOpen, setJob }) => {
   );
 };
 
-export default JobDialog;
+export default UpdateDialog;

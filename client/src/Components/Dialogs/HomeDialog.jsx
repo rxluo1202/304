@@ -76,7 +76,7 @@ const appInitialValues = {
     ctime: ''
 }
 
-const HomeDialog = ({ open, setOpen, setApplication}) => {
+const HomeDialog = ({ jobID, open, setOpen, setApplication }) => {
     const classes = useStyle();
     const [ input, setInput ] = useState(appInitialValues);
 
@@ -99,15 +99,14 @@ const HomeDialog = ({ open, setOpen, setApplication}) => {
         <Dialog open={open} onClose={handleClose}>
             <DialogContent className={classes.component} >
                 <Box style={{display: 'flex'}}>
-                    {
+                    { 
                         <Box className={classes.login}>
-                            <TextField onChange={(e) => onInputChange(e)} name='username' label='Enter Username' />
-                            <TextField onChange={(e) => onInputChange(e)} name='email' label='Enter Email' />
-                            <TextField onChange={(e) => onInputChange(e)} name='time' label='Enter Time' />
-                            <TextField onChange={(e) => onInputChange(e)} name='phone' label='Enter Phone' />
-                            <TextField onChange={(e) => onInputChange(e)} name='supportingdocument' label='Enter Supporting Document Name' />
+                            <span style={{fontSize: 20, fontWeight: 'bold'}}>Job ID: {jobID}</span>
+                            <TextField onChange={(e) => onInputChange(e)} name='username' label='Enter Your Username' />
+                            {/* 之后改一下只有登录了apply button才会显示所以也就不用填email了 */}
+                            <TextField onChange={(e) => onInputChange(e)} name='email' label='Enter Your Email' />
+                            <TextField onChange={(e) => onInputChange(e)} name='phone' label='Enter Your Phone' />
                             <TextField onChange={(e) => onInputChange(e)} name='intro' label='Enter Application Introduction' />
-                            <TextField onChange={(e) => onInputChange(e)} name='ctime' label='Completion date' />
                             <Button className={classes.loginbtn} onClick={() => submitApplication()} >Apply</Button>
                         </Box>
                     }

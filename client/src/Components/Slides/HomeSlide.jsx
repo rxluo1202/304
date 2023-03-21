@@ -61,10 +61,13 @@ const useStyle = makeStyles((theme) => ({
 const MultiSlide = ({ data }) => {
   const classes = useStyle();
 
+  const [appliedID, setAppliedID] = useState(-1);
+
   const [open, setOpen] = useState(false);
 
-  const openHomeDialog = () => {
+  const openHomeDialog = (id) => {
     setOpen(true);
+    setAppliedID(id);
   };
 
   return (
@@ -105,10 +108,10 @@ const MultiSlide = ({ data }) => {
             {temp.endDate}
           </Typography>
 
-          <Button variant="contained" onClick={() => openHomeDialog()}>
+          <Button variant="contained" onClick={() => openHomeDialog(temp.jobID)}>
             Apply
           </Button>
-          <HomeDialog open={open} setOpen={setOpen} />
+          <HomeDialog jobID={appliedID} open={open} setOpen={setOpen} />
         </Box>
       ))}
     </Box>

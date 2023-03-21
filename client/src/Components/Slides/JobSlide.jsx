@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import JobDialog from "../Dialogs/JobDialog";
+import UpdateDialog from "../Dialogs/UpdateDialog";
 import Alert from 'react-popup-alert'
 
 const responsive = {
@@ -62,10 +63,14 @@ const useStyle = makeStyles((theme) => ({
 const MultiSlide = ({ data }) => {
   const classes = useStyle();
 
-  const [open, setOpen] = useState(false);
+  const [submitOpen, setSubmitOpen] = useState(false);
+  const [updateOpen, setUpdateOpen] = useState(false);
 
-  // const [loading, setLoading] = useState(-1);
   const [loading, setLoading] = useState({});
+
+  const [newJobID, setNewJobID] = useState(-1);
+  const [updatedID, setUpdatedID] = useState(-1);
+  const [deletedID, setDeletedID] = useState(-1);
 
   const [alert, setAlert] = React.useState({
     type: 'error',
@@ -77,30 +82,35 @@ const MultiSlide = ({ data }) => {
   // console.log(loading);
 
   const openJobDialog = () => {
-    setOpen(true);
+    setSubmitOpen(true);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (id) => {
+    setUpdatedID(id);
+    setUpdateOpen(true);
     console.log("update!");
+    console.log(updatedID);
   };
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
+    setDeletedID(id);
     console.log("delete!");
+    console.log(deletedID);
   };
 
-  function onCloseAlert(id) {
-    setAlert({
-      type: '',
-      text: '',
-      show: false
-    });
-    console.log("clooooooooooose")
-    console.log(id)
-    setLoading((previousState) => ({
-      ...previousState,
-      [id]: false
-    }));
-  }
+  // function onCloseAlert(id) {
+  //   setAlert({
+  //     type: '',
+  //     text: '',
+  //     show: false
+  //   });
+  //   console.log("clooooooooooose")
+  //   console.log(id)
+  //   setLoading((previousState) => ({
+  //     ...previousState,
+  //     [id]: false
+  //   }));
+  // }
 
   function viewEmail(id) {
     setAlert({
@@ -108,11 +118,6 @@ const MultiSlide = ({ data }) => {
       text: 'The emails of the people that have applied for this job are:',
       show: true
     });
-    console.log("oooooooooopen")
-    console.log(id)
-    // console.log("e is ...........");
-    // console.log(e);
-    // setLoading(e.jobID)
     setLoading((previousState) => ({
       ...previousState,
       [id]: !previousState[id]
@@ -178,10 +183,10 @@ const MultiSlide = ({ data }) => {
             Salary type:
             {temp.salaryType}
           </Typography> */}
-          <Button variant="contained" onClick={() => handleUpdate()}>
+          <Button variant="contained" onClick={() => handleUpdate(temp.jobID)}>
             update
           </Button>
-          <Button variant="contained" onClick={() => handleDelete()}>
+          <Button variant="contained" onClick={() => handleDelete(temp.jobID)}>
             delete
           </Button>
           <Button variant="contained" onClick={() => viewEmail(temp.jobID)}>
@@ -201,7 +206,8 @@ const MultiSlide = ({ data }) => {
             textStyles={{}}
             buttonStyles={{}}
           />)}
-          <JobDialog open={open} setOpen={setOpen} />
+          <JobDialog jobID={newJobID} open={submitOpen} setOpen={setSubmitOpen} />
+          <UpdateDialog jobID={updatedID} open={updateOpen} setOpen={setUpdateOpen} />
         </Box>
       ))}
       <Button variant="contained" onClick={() => openJobDialog()}>
