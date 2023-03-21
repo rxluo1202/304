@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import JobDialog from "../Dialogs/JobDialog";
+import Alert from 'react-popup-alert'
 
 const responsive = {
   desktop: {
@@ -63,6 +64,20 @@ const MultiSlide = ({ data }) => {
 
   const [open, setOpen] = useState(false);
 
+  // const [loading, setLoading] = useState(-1);
+  const [loading, setLoading] = useState({});
+
+  const [openedID, setOpenedID] = useState(-1);
+
+  const [alert, setAlert] = React.useState({
+    type: 'error',
+    text: 'This is a alert message',
+    show: false
+  })
+
+  console.log('loaaaaaaaaaaaaaading');
+  console.log(loading);
+
   const openJobDialog = () => {
     setOpen(true);
   };
@@ -75,9 +90,34 @@ const MultiSlide = ({ data }) => {
     console.log("delete!");
   };
 
-  const viewEmail = () => {
-    console.log("view email!");
-  };
+  function onCloseAlert() {
+    setAlert({
+      type: '',
+      text: '',
+      show: false
+    });
+    setLoading((previousState) => ({
+      ...previousState,
+      [openedID]: !previousState[openedID]
+    }));
+  }
+
+  function viewEmail(id) {
+    setAlert({
+      type: 'success',
+      text: 'The emails of the people that have applied for this job are:',
+      show: true
+    });
+    // console.log("e is ...........");
+    // console.log(e);
+    // setLoading(e.jobID)
+    setLoading((previousState) => ({
+      ...previousState,
+      [id]: !previousState[id]
+    }));
+    setOpenedID(id)
+  }
+
 
   return (
     <Box className={classes.component}>
@@ -143,9 +183,23 @@ const MultiSlide = ({ data }) => {
           <Button variant="contained" onClick={() => handleDelete()}>
             delete
           </Button>
-          <Button variant="contained" onClick={() => viewEmail()}>
+          <Button variant="contained" onClick={() => viewEmail(temp.jobID)}>
             view applicant email
           </Button>
+          {loading[temp.jobID]? <Alert
+            header={'Applicants\' emails:'}
+            btnText={'Close'}
+            text={alert.text}
+            type={alert.type}
+            show={alert.show}
+            onClosePress={onCloseAlert}
+            pressCloseOnOutsideClick={true}
+            showBorderBottom={true}
+            alertStyles={{}}
+            headerStyles={{}}
+            textStyles={{}}
+            buttonStyles={{}}
+          /> : <div></div>}
           <JobDialog open={open} setOpen={setOpen} />
         </Box>
       ))}
