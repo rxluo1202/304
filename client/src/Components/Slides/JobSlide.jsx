@@ -67,16 +67,14 @@ const MultiSlide = ({ data }) => {
   // const [loading, setLoading] = useState(-1);
   const [loading, setLoading] = useState({});
 
-  const [openedID, setOpenedID] = useState(-1);
-
   const [alert, setAlert] = React.useState({
     type: 'error',
-    text: 'This is a alert message',
+    text: 'This is an alert message',
     show: false
   })
 
-  console.log('loaaaaaaaaaaaaaading');
-  console.log(loading);
+  // console.log('loaaaaaaaaaaaaaading');
+  // console.log(loading);
 
   const openJobDialog = () => {
     setOpen(true);
@@ -90,15 +88,17 @@ const MultiSlide = ({ data }) => {
     console.log("delete!");
   };
 
-  function onCloseAlert() {
+  function onCloseAlert(id) {
     setAlert({
       type: '',
       text: '',
       show: false
     });
+    console.log("clooooooooooose")
+    console.log(id)
     setLoading((previousState) => ({
       ...previousState,
-      [openedID]: !previousState[openedID]
+      [id]: false
     }));
   }
 
@@ -108,6 +108,8 @@ const MultiSlide = ({ data }) => {
       text: 'The emails of the people that have applied for this job are:',
       show: true
     });
+    console.log("oooooooooopen")
+    console.log(id)
     // console.log("e is ...........");
     // console.log(e);
     // setLoading(e.jobID)
@@ -115,7 +117,6 @@ const MultiSlide = ({ data }) => {
       ...previousState,
       [id]: !previousState[id]
     }));
-    setOpenedID(id)
   }
 
 
@@ -186,20 +187,20 @@ const MultiSlide = ({ data }) => {
           <Button variant="contained" onClick={() => viewEmail(temp.jobID)}>
             view applicant email
           </Button>
-          {loading[temp.jobID]? <Alert
+          {loading[temp.jobID] && (<Alert
             header={'Applicants\' emails:'}
-            btnText={'Close'}
+            btnText={''}
             text={alert.text}
             type={alert.type}
             show={alert.show}
-            onClosePress={onCloseAlert}
+            onClosePress={{}}
             pressCloseOnOutsideClick={true}
             showBorderBottom={true}
             alertStyles={{}}
             headerStyles={{}}
             textStyles={{}}
             buttonStyles={{}}
-          /> : <div></div>}
+          />)}
           <JobDialog open={open} setOpen={setOpen} />
         </Box>
       ))}
