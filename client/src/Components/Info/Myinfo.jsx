@@ -1,5 +1,8 @@
 import React, { useState, useContext } from "react";
 import Jobs from "./Jobs";
+import Division from "../Buttons/Division";
+import DisplayMyPost from "../Buttons/DisplayMyPost";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -98,13 +101,15 @@ const Myinfo = () => {
 
   return (
     <div className="App">
+      <Division/>
+      <DisplayMyPost/>
       <nav>
         {/* <ul>
           <li
-            onClick={() => handleClick("Jobs")}
-            className={activeTab === "Jobs" ? "active" : ""}
+          onClick={() => handleClick("Jobs")}
+          className={activeTab === "Jobs" ? "active" : ""}
           >
-            Jobs
+          Jobs
           </li>
         </ul> */}
       </nav>

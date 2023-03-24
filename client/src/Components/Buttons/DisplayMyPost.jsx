@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from "react"
 
 import Alert from 'react-popup-alert'
+import {
+    TextField,
+  } from "@material-ui/core";
+const DisplayMyPost = () => {
 
-const Division = () => {
+    const InitialValues = {
+        jobID: "",
+        
+    }; 
   const [alert, setAlert] = React.useState({
     type: 'error',
     text: 'This is a alert message',
@@ -20,15 +27,22 @@ const Division = () => {
   function onShowAlert(type) {
     setAlert({
       type: type,
-      text: 'Job 1' ,
+      text: 'Job 1,  Number of Application: 50' ,
       show: true
     })
   }
+  const [input, setInput] = useState(InitialValues);
+
+  const onInputChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>
+       
         <TextField
+             onChange={(e) => onInputChange(e)}
             name="jobID"
             label="Enter job id"
         />
@@ -55,4 +69,4 @@ const Division = () => {
   )
 }
 
-export default Division
+export default DisplayMyPost
