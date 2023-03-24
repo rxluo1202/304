@@ -1,47 +1,46 @@
-import { Box, makeStyles } from '@material-ui/core';
-import HomeSlide from './Slides/HomeSlide';
+import { Box, makeStyles } from "@material-ui/core";
+import HomeSlide from "./Slides/HomeSlide";
 import jobs from "../jobs.json";
-import MostRecent from './Buttons/MostRecent';
-import React,  { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'; // hooks
-import { getProducts as listProducts } from '../redux/actions/productActions';
+import MostRecent from "./Buttons/MostRecent";
+import FilterBy from "./Buttons/FilterBy";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"; // hooks
+import { getProducts as listProducts } from "../redux/actions/productActions";
 // import { navData } from '../constant/data';
 
-
 const useStyle = makeStyles({
-    component: {
-        padding: 10,
-        background: '#F2F2F2'
-    }
-})
+  component: {
+    padding: 10,
+    background: "#F2F2F2",
+  },
+});
 
 const Home = () => {
-    const classes = useStyle();
+  const classes = useStyle();
 
-    // const getProducts = useSelector(state => state.getProducts);
-    // const { products} = getProducts;
+  // const getProducts = useSelector(state => state.getProducts);
+  // const { products} = getProducts;
 
-    // const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(listProducts())
-    // }, [dispatch])
+  // useEffect(() => {
+  //     dispatch(listProducts())
+  // }, [dispatch])
 
-    console.log("jjjjjjjjjjjjjjjjobs")
-    for (var i = 0; i < jobs.length; i++) {
-        console.log(jobs[i])
-    }
-    
+  console.log("jjjjjjjjjjjjjjjjobs");
+  for (var i = 0; i < jobs.length; i++) {
+    console.log(jobs[i]);
+  }
 
-
-    return (
-        <>
-            <div className='App'>
-                <MostRecent />
-                <HomeSlide data={jobs} multi={true} />
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <div className="App">
+        <FilterBy />
+        <MostRecent />
+        <HomeSlide data={jobs} multi={true} />
+      </div>
+    </>
+  );
+};
 
 export default Home;
