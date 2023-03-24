@@ -7,7 +7,7 @@ import {
 const DisplayMyPost = () => {
 
     const InitialValues = {
-        jobID: "",
+        num: 1,
         
     }; 
   const [alert, setAlert] = React.useState({
@@ -27,7 +27,7 @@ const DisplayMyPost = () => {
   function onShowAlert(type) {
     setAlert({
       type: type,
-      text: 'Job 1,  Number of Application: 50' ,
+      text: 'Job 1,  Job 3, Job 5' ,
       show: true
     })
   }
@@ -43,11 +43,11 @@ const DisplayMyPost = () => {
        
         <TextField
              onChange={(e) => onInputChange(e)}
-            name="jobID"
-            label="Enter job id"
+            name= "num"
+            label="Enter Number"
         />
         <button onClick={() => onShowAlert('success')}>
-          Display number applications of this job
+          Display jobs greater than {input.num}
         </button>
        
       </div>

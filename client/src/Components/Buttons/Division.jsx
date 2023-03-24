@@ -1,9 +1,7 @@
 import React, { useState } from "react"
 
 import Alert from 'react-popup-alert'
-import {
-    TextField,
-  } from "@material-ui/core";
+
 const Division = () => {
 
     const InitialValues = {
@@ -27,23 +25,17 @@ const Division = () => {
   function onShowAlert(type) {
     setAlert({
       type: type,
-      text: 'Bob and Alice \  sd' ,
+      text: 'Bob and Alice ' ,
       show: true
     })
   }
   const [input, setInput] = useState(InitialValues);
 
-  const onInputChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+ 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>
-        <TextField
-             onChange={(e) => onInputChange(e)}
-            name="jobID"
-            label="Enter job id"
-        />
+      
         <button onClick={() => onShowAlert('success')}>
           Show the people that applied all of jobs I have posted
         </button>

@@ -101,8 +101,8 @@ const Myinfo = () => {
 
   return (
     <div className="App">
-      <Division/>
       <DisplayMyPost/>
+      <Division/>
       <nav>
         {/* <ul>
           <li
