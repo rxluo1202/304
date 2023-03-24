@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "d:\\downloads\\CPSC304_JavaDemo.jar"
+    ]
+}
