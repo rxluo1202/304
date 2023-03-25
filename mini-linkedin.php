@@ -266,20 +266,20 @@
         function handleResetRequest() {
             global $db_conn;
             // Drop old table
+            executePlainSQL("DROP TABLE Applications_Completes");
+            executePlainSQL("DROP TABLE Applications_For");
+            executePlainSQL("DROP TABLE Jobs_Posts");            
             executePlainSQL("DROP TABLE Employers");
             executePlainSQL("DROP TABLE Employees");
-            executePlainSQL("DROP TABLE Applications_Completes");
-            executePlainSQL("DROP TABLE Jobs_Posts");
-            executePlainSQL("DROP TABLE Applications_For");
             executePlainSQL("DROP TABLE Users");
         
             // Create new table
             echo "<br> Creating new tables... <br>";
             executePlainSQL("CREATE TABLE Users (email VARCHAR(255), phone VARCHAR(15) NOT NULL, userName VARCHAR(20), password VARCHAR(20), PRIMARY KEY (email), UNIQUE(phone))");
-            executePlainSQL("CREATE TABLE Employers (email VARCHAR(255), FOREIGN KEY (email REFERENCES Users(email) ON DELETE CASCADE ON UPDATE CASCADE)");
-            executePlainSQL("CREATE TABLE Employees (email VARCHAR(255), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE ON UPDATE CASCADE)");
-            executePlainSQL("CREATE TABLE Applications_Completes (appID INT, intro VARCHAR(500), email VARCHAR(255) NOT NULL, PRIMARY KEY (appID), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE ON UPDATE CASCADE)");
-            executePlainSQL("CREATE TABLE Jobs_Posts (jobID INT, industry VARCHAR(10), jobName VARCHAR(20), postDate DATE, endDate DATE, email VARCHAR(255) NOT NULL, PRIMARY KEY (jobID), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE ON UPDATE CASCADE)");
+            executePlainSQL("CREATE TABLE Employers (email VARCHAR(255), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
+            executePlainSQL("CREATE TABLE Employees (email VARCHAR(255), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
+            executePlainSQL("CREATE TABLE Applications_Completes (appID INT, intro VARCHAR(500), email VARCHAR(255) NOT NULL, PRIMARY KEY (appID), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
+            executePlainSQL("CREATE TABLE Jobs_Posts (jobID INT, industry VARCHAR(10), jobName VARCHAR(20), postDate DATE, endDate DATE, email VARCHAR(255) NOT NULL, PRIMARY KEY (jobID), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
             executePlainSQL("CREATE TABLE Applications_For (appID INT, intro VARCHAR(500), jobID INT NOT NULL, PRIMARY KEY (appID), FOREIGN KEY (jobID) REFERENCES Jobs_Posts(jobID) ON DELETE CASCADE)");
         
             OCICommit($db_conn);
