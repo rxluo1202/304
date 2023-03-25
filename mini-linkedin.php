@@ -5,12 +5,19 @@
 
     <body>
         
-        <h2>Reset</h2>
+        <h2>Initialization</h2>
         <p>If you wish to reset the table press on the reset button. If this is the first time you're running this page, you MUST use reset</p>
         <form method="POST" action="mini-linkedin.php">
             <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
             <input type="hidden" id="resetTablesRequest" name="resetTablesRequest">
             <p><input type="submit" value="Reset" name="reset"></p>
+
+        </form>
+        <form method="POST" action="mini-linkedin.php">
+            <!-- if you want another page to load after the button is clicked, you have to specify that page in the action parameter -->
+            <input type="hidden" id="insertTablesRequest" name="insertTablesRequest">
+            <p><input type="submit" value="Insert some data" name="insert"></p>
+
         </form>
 
         <hr />
@@ -260,7 +267,14 @@
             global $db_conn;
 
             $result = executePlainSQL("SELECT* FROM Jobs_Posts");
+            // var_dump($result);
             echo printResult($result);
+
+            // $result = executePlainSQL("SELECT Count(*) FROM Jobs_Posts");
+
+            // if (($row = oci_fetch_row($result)) != false) {
+            //     echo "<br> The number of tuples in the table: " . $row[0] . "<br>";
+            // }
         }
 
         function handleResetRequest() {
@@ -279,11 +293,119 @@
             executePlainSQL("CREATE TABLE Employers (email VARCHAR(255), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
             executePlainSQL("CREATE TABLE Employees (email VARCHAR(255), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
             executePlainSQL("CREATE TABLE Applications_Completes (appID INT, intro VARCHAR(500), email VARCHAR(255) NOT NULL, PRIMARY KEY (appID), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
-            executePlainSQL("CREATE TABLE Jobs_Posts (jobID INT, industry VARCHAR(10), jobName VARCHAR(20), postDate DATE, endDate DATE, email VARCHAR(255) NOT NULL, PRIMARY KEY (jobID), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
+            executePlainSQL("CREATE TABLE Jobs_Posts (jobID INT, industry VARCHAR(50), jobName VARCHAR(25), postDate DATE, endDate DATE, email VARCHAR(255) NOT NULL, PRIMARY KEY (jobID), FOREIGN KEY (email) REFERENCES Users(email) ON DELETE CASCADE)");
             executePlainSQL("CREATE TABLE Applications_For (appID INT, intro VARCHAR(500), jobID INT NOT NULL, PRIMARY KEY (appID), FOREIGN KEY (jobID) REFERENCES Jobs_Posts(jobID) ON DELETE CASCADE)");
         
             OCICommit($db_conn);
-        }          
+        } 
+        
+        function handleInsertRequest() {
+            global $db_conn;
+        
+            // Create new table
+            echo "<br> Adding some data... <br>";
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('abcd@gmail.com', '19585406686', 'John Bill', 'od324sajsod')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('foo@gmail.com', '15230990864', 'Ajeet McCracken', 'fijsoi243')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('bar@gmail.com', '19021867676', 'Felix Samuel', 'ljtrew32')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('fefgh90@gmail.com', '12127733559', 'Arwel Ybarra', 'plljak_dk')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('blahblah@gmail.com', '13179122284', 'Niles Medved', 'euowe2sd')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('opiu@gmail.com', '17262331094', 'Perle Simonis', 'ololol78u')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('xyz@outlook.com', '17300984224', 'Kalyani Adkins', 'aoloejdp23')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('def@gmail.com', '10778044605', 'Felizitas Lyon', 'thasooft#s')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('ghi@gmail.com',  '16846966019', 'Martin Strong', 'dolspaslp')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('jkl@outlook.com', '14140999677', 'Serhii Brant', 'ha3lo4basko')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('mnk@gmail.com', '15796144755', 'Boniface Ikin', 'f33llik3dyin')");
+            executePlainSQL("INSERT INTO Users (email, phone, userName, password) VALUES 
+            ('row@gmail.com', '1951548476', 'Ajay Sinclair', 'n3noonslay33r')");
+            
+            executePlainSQL("INSERT INTO Employees (email) VALUES 
+            ('abcd@gmail.com')");
+            executePlainSQL("INSERT INTO Employees (email) VALUES 
+            ('foo@gmail.com')");
+            executePlainSQL("INSERT INTO Employees (email) VALUES 
+            ('bar@gmail.com')");
+            executePlainSQL("INSERT INTO Employees (email) VALUES 
+            ('fefgh90@gmail.com')");
+            executePlainSQL("INSERT INTO Employees (email) VALUES 
+            ('blahblah@gmail.com')");
+            executePlainSQL("INSERT INTO Employees (email) VALUES 
+            ('opiu@gmail.com')");
+            
+            executePlainSQL("INSERT INTO Employers (email) VALUES 
+            ('xyz@outlook.com')");
+            executePlainSQL("INSERT INTO Employers (email) VALUES 
+            ('def@gmail.com')");
+            executePlainSQL("INSERT INTO Employers (email) VALUES 
+            ('ghi@gmail.com')");
+            executePlainSQL("INSERT INTO Employers (email) VALUES 
+            ('jkl@outlook.com')");
+            executePlainSQL("INSERT INTO Employers (email) VALUES 
+            ('mnk@gmail.com')");
+            executePlainSQL("INSERT INTO Employers (email) VALUES 
+            ('row@gmail.com')");
+        
+            executePlainSQL("INSERT INTO Applications_Completes (appID, intro, email) VALUES 
+            (1, 'here is my application', 'abcd@gmail.com')");
+            executePlainSQL("INSERT INTO Applications_Completes (appID, intro, email) VALUES 
+            (2, 'here is my application', 'foo@gmail.com')");
+            executePlainSQL("INSERT INTO Applications_Completes (appID, intro, email) VALUES 
+            (3, 'here is my application', 'bar@gmail.com')");
+            executePlainSQL("INSERT INTO Applications_Completes (appID, intro, email) VALUES 
+            (4, 'here is my application', 'fefgh90@gmail.com')");
+            executePlainSQL("INSERT INTO Applications_Completes (appID, intro, email) VALUES 
+            (5, 'here is my application', 'blahblah@gmail.com')");
+            executePlainSQL("INSERT INTO Applications_Completes (appID, intro, email) VALUES 
+            (6, 'here is my application', 'opiu@gmail.com')");
+            executePlainSQL("INSERT INTO Applications_Completes (appID, intro, email) VALUES 
+            (7, 'here is my application', 'bar@gmail.com')");
+            executePlainSQL("INSERT INTO Applications_Completes (appID, intro, email) VALUES 
+            (8, 'here is my application', 'foo@gmail.com')");
+            
+            executePlainSQL("INSERT INTO Jobs_Posts (jobID, industry, jobName, postDate, endDate, email) VALUES 
+            (1, 'Finance', 'accountant', TO_DATE('2023-01-01', 'yyyy-mm-dd'), TO_DATE('2023-01-30', 'yyyy-mm-dd'), 'xyz@outlook.com')");
+            executePlainSQL("INSERT INTO Jobs_Posts (jobID, industry, jobName, postDate, endDate, email) VALUES 
+            (2, 'Information Technology', 'software engineer', TO_DATE('2023-01-02', 'yyyy-mm-dd'), TO_DATE('2023-01-28', 'yyyy-mm-dd'), 'def@gmail.com')");
+            executePlainSQL("INSERT INTO Jobs_Posts (jobID, industry, jobName, postDate, endDate, email) VALUES 
+            (3, 'Information Technology', 'network administrator', TO_DATE('2023-01-06', 'yyyy-mm-dd'), TO_DATE('2023-01-30', 'yyyy-mm-dd'), 'ghi@gmail.com')");
+            executePlainSQL("INSERT INTO Jobs_Posts (jobID, industry, jobName, postDate, endDate, email) VALUES 
+            (4, 'Healthcare', 'doctor', TO_DATE('2022-01-02', 'yyyy-mm-dd'), TO_DATE('2023-01-30', 'yyyy-mm-dd'), 'jkl@outlook.com')");
+            executePlainSQL("INSERT INTO Jobs_Posts (jobID, industry, jobName, postDate, endDate, email) VALUES 
+            (5, 'Healthcare', 'nurse', TO_DATE('2023-02-01', 'yyyy-mm-dd'), TO_DATE('2023-02-25', 'yyyy-mm-dd'), 'mnk@gmail.com')");
+            executePlainSQL("INSERT INTO Jobs_Posts (jobID, industry, jobName, postDate, endDate, email) VALUES 
+            (6, 'Education', 'teacher', TO_DATE('2023-02-03', 'yyyy-mm-dd'), TO_DATE('2023-02-22', 'yyyy-mm-dd'), 'row@gmail.com')");
+            executePlainSQL("INSERT INTO Jobs_Posts (jobID, industry, jobName, postDate, endDate, email) VALUES 
+            (7, 'Finance', 'loan officers', TO_DATE('2023-01-01', 'yyyy-mm-dd'), TO_DATE('2023-01-20', 'yyyy-mm-dd'), 'xyz@outlook.com')");
+
+            executePlainSQL("INSERT INTO Applications_For (appID, intro, jobID) VALUES 
+            (1, 'here is my application', 1)");
+            executePlainSQL("INSERT INTO Applications_For (appID, intro, jobID) VALUES 
+            (2, 'here is my application', 2)");
+            executePlainSQL("INSERT INTO Applications_For (appID, intro, jobID) VALUES 
+            (3, 'here is my application', 3)");
+            executePlainSQL("INSERT INTO Applications_For (appID, intro, jobID) VALUES 
+            (4, 'here is my application', 4)");
+            executePlainSQL("INSERT INTO Applications_For (appID, intro, jobID) VALUES 
+            (5, 'here is my application', 5)");
+            executePlainSQL("INSERT INTO Applications_For (appID, intro, jobID) VALUES 
+            (6, 'here is my application', 6)");
+            executePlainSQL("INSERT INTO Applications_For (appID, intro, jobID) VALUES 
+            (7, 'here is my application', 7)");
+            executePlainSQL("INSERT INTO Applications_For (appID, intro, jobID) VALUES 
+            (8, 'here is my application', 7)");
+        
+            OCICommit($db_conn);
+        }
 
         function handleGETRequest() {
             if (connectToDB()) {
@@ -298,13 +420,15 @@
             if (connectToDB()) {
                 if (array_key_exists('resetTablesRequest', $_POST)) {
                     handleResetRequest();
+                } else if (array_key_exists('insertTablesRequest', $_POST)) {
+                    handleInsertRequest();
                 }
 
                 disconnectFromDB();
             }
         }
 
-        if (isset($_POST['reset'])) {
+        if (isset($_POST['reset']) || isset($_POST['insert'])) {
             handlePOSTRequest();
         } else if (isset($_GET['countTupleRequest'])) {
             handleGETRequest();
