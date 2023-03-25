@@ -11,10 +11,11 @@
             <input type="submit" name="AllTuples"></p>
         </form>
 
+        <!-- insert1 -->
         <hr/>
         <h2>Post a new job</h2>
-        <form method="POST" action="handlerinsert.php"> 
-            <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+        <form method="POST" action="handlerinsert1.php"> 
+            <input type="hidden" id="insertQueryRequest1" name="insertQueryRequest1">
 
             jobID: <input type="text" name="jobID"> <br /><br />
             Industry: <input type="text" name="insdutry"> <br /><br />
@@ -23,22 +24,24 @@
             End date: <input type="text" name="endDate"> <br /><br />
             Employer Email: <input type="text" name="email"> <br /><br />
 
-            <input type="submit" value="Post a job" name="insertSubmit">
+            <input type="submit" value="Post a new job" name="insertSubmit1">
         </form>
 
+        <!-- insert2 -->
         <hr/>
         <h2>Apply for a job</h2>
-        <form method="POST" action="handlerinsert.php"> 
-            <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+        <form method="POST" action="handlerinsert2.php"> 
+            <input type="hidden" id="insertQueryRequest2" name="insertQueryRequest2">
 
             jobID: <input type="text" name="jobID"> <br /><br />
             appID: <input type="text" name="appID"> <br /><br />
             Intro: <input type="text" name="intro"> <br /><br />
             Email: <input type="text" name="email"> <br /><br />
 
-            <input type="submit" value="Post a job" name="insertSubmit">
+            <input type="submit" value="Apply" name="insertSubmit2">
         </form>
 
+        <!-- update -->
         <hr/>
         <h2>Update personal information</h2>
         <form method="POST" action="handleUpdate.php"> <!--refresh page when submitted-->
@@ -52,6 +55,7 @@
         <input type="submit" value="Update" name="updateSubmit"></p>
         </form>
 
+        <!-- delete -->
         <hr/>
         <h2>Delete a job</h2>
         <form method="POST" action="handlerdelete.php"> 
@@ -63,6 +67,7 @@
             <input type="submit" value="Delete" name="deleteSubmit">
         </form>
 
+        <!-- selection -->
         <hr/>
         <h2>View all the jobs posted by:</h2>
         <form method="POST" action="handlerSelection.php"> 
@@ -72,6 +77,7 @@
         </form>
         <hr/>
 
+        <!-- projection -->
         <h2>View all our users</h2>
         <br />
         <form method="POST" action="handlerprojection.php"> 
@@ -90,6 +96,7 @@
         </form>
         <hr/>
 
+        <!-- join -->
         <h2>Find all applicants to a job</h2>
         <form method="POST" action="handlerjoin.php"> 
             <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
@@ -98,6 +105,7 @@
         </form>
         <hr/>
 
+        <!-- division -->
         <h2>View the applicants of all jobs</h2>
         <form method="POST" action="handlerdivision.php"> 
         <input type="submit" value="Check" name="insertDiv"> 
@@ -105,7 +113,7 @@
         </form>
         <hr/>
 
-
+        <!-- aggregation with group by -->
         <h2><h2>View jobs that have applicants</h2></h2>
         <br />
         <form method="POST" action="handlerGroupby.php"> 
@@ -117,7 +125,7 @@
         </form>
         <hr/>
 
-
+        <!-- aggregation with group by & having -->
         <h2>View jobs that have no fewer than some applicants</h2>
         <br />
         <form method="POST" action="handlerHaving.php"> 
@@ -127,6 +135,7 @@
         </form>
         <hr/>
 
+        <!-- nested aggregation -->
         <h2>View the latest jobs and the number of their applicants</h2>
         <br />
         <form method="POST" action="handlerNested.php"> 
