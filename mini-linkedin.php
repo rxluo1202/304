@@ -22,10 +22,14 @@
 
         <hr />
 
-        <h2>View all jobs</h2>
+        <h2>Jobs & Applications</h2>
         <form method="GET" action="mini-linkedin.php">
-            <input type="hidden" id="countTupleRequest" name="countTupleRequest">
-            <input type="submit" name="AllJobs"></p>
+            <input type="hidden" id="countTupleRequest1" name="countTupleRequest1">
+            <input type="submit" value="View All Jobs" name="AllJobs"></p>
+        </form>
+        <form method="GET" action="mini-linkedin.php">
+            <input type="hidden" id="countTupleRequest2" name="countTupleRequest2">
+            <input type="submit" value="View All Applications" name="AllApplications"></p>
         </form>
 
         <!-- insert1 -->
@@ -220,13 +224,25 @@
             return $statement;
         }
 
-        function printResult($result) {
+        function printResult1($result) {
             echo "<br>All the jobs:<br>";
             echo "<table>";
             echo "<tr><th>jobID</th><th>Industry</th><th>Job name</th><th>Post date</th><th>End date</th><th>Employer email</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
                 echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td>" . $row[5] . "</td></tr>"; //or just use "echo $row[0]"
+            }
+
+            echo "</table>";
+        }
+
+        function printResult2($result) {
+            echo "<br>All the applications:<br>";
+            echo "<table>";
+            echo "<tr><th>appID</th><th>jobID</th><th>Intro</th><th>Applicant's email</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td></tr>"; //or just use "echo $row[0]"
             }
 
             echo "</table>";
@@ -263,18 +279,26 @@
             OCILogoff($db_conn);
         }
 
-        function handleCountRequest() {
+        function handleCountRequest1() {
             global $db_conn;
 
             $result = executePlainSQL("SELECT* FROM Jobs_Posts");
             // var_dump($result);
-            echo printResult($result);
+            echo printResult1($result);
 
             // $result = executePlainSQL("SELECT Count(*) FROM Jobs_Posts");
 
             // if (($row = oci_fetch_row($result)) != false) {
             //     echo "<br> The number of tuples in the table: " . $row[0] . "<br>";
             // }
+        }
+
+        function handleCountRequest2() {
+            global $db_conn;
+
+            $result = executePlainSQL("SELECT Applications_Completes.appID, Applications_For.jobID, Applications_Completes.intro, Applications_Completes.email FROM Applications_For, Applications_Completes WHERE Applications_For.appID = Applications_Completes.appID");
+            // var_dump($result);
+            echo printResult2($result);
         }
 
         function handleResetRequest() {
@@ -410,7 +434,9 @@
         function handleGETRequest() {
             if (connectToDB()) {
                 if (array_key_exists('AllJobs', $_GET)) {
-                    handleCountRequest();
+                    handleCountRequest1();
+                } else if (array_key_exists('AllApplications', $_GET)) {
+                    handleCountRequest2();
                 }
 
                 disconnectFromDB();
@@ -431,7 +457,7 @@
 
         if (isset($_POST['reset']) || isset($_POST['insert'])) {
             handlePOSTRequest();
-        } else if (isset($_GET['countTupleRequest'])) {
+        } else if (isset($_GET['countTupleRequest1']) || isset($_GET['countTupleRequest2'])) {
             handleGETRequest();
         }
 
