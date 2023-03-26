@@ -31,6 +31,17 @@
             <input type="hidden" id="countTupleRequest2" name="countTupleRequest2">
             <input type="submit" value="View All Applications" name="AllApplications"></p>
         </form>
+        <hr/>
+
+        <h2>Employers & Employees</h2>
+        <form method="GET" action="mini-linkedin.php">
+            <input type="hidden" id="countTupleRequest3" name="countTupleRequest3">
+            <input type="submit" value="View Employers" name="Employers"></p>
+        </form>
+        <form method="GET" action="mini-linkedin.php">
+            <input type="hidden" id="countTupleRequest4" name="countTupleRequest4">
+            <input type="submit" value="View Employees" name="Employees"></p>
+        </form>
 
         <!-- insert1 -->
         <hr/>
@@ -68,7 +79,7 @@
         <form method="POST" action="handlerinsert3.php"> <!--refresh page when submitted-->
 
             <input type="hidden" id="insertQueryRequest3" name="insertQueryRequest3">
-            Email <input type="text" name="email"> <br /><br />
+            Email: <input type="text" name="email"> <br /><br />
             Phone: <input type="text" name="phone"> <br /><br />
             Username: <input type="text" name="userName"> <br /><br />
             Password: <input type="text" name="password"> <br /><br />
@@ -112,7 +123,7 @@
         <form method="POST" action="handlerSelection.php"> 
             <input type="hidden" id="selectQueryRequest" name="selectQueryRequest">
             Employer email: <input type="text" name="email"> <br /><br />
-            <input type="submit" value="View the jobs the user posted" name="selectSubmit">
+            <input type="submit" name="selectSubmit">
         </form>
         <hr/>
 
@@ -225,7 +236,7 @@
         }
 
         function printResult1($result) {
-            echo "<br>All the jobs:<br>";
+            echo "<br>All jobs:<br>";
             echo "<table>";
             echo "<tr><th>jobID</th><th>Industry</th><th>Job name</th><th>Post date</th><th>End date</th><th>Employer email</th></tr>";
 
@@ -237,9 +248,33 @@
         }
 
         function printResult2($result) {
-            echo "<br>All the applications:<br>";
+            echo "<br>All applications:<br>";
             echo "<table>";
             echo "<tr><th>appID</th><th>jobID</th><th>Intro</th><th>Applicant's email</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td></tr>"; //or just use "echo $row[0]"
+            }
+
+            echo "</table>";
+        }
+
+        function printResult3($result) {
+            echo "<br>All employers:<br>";
+            echo "<table>";
+            echo "<tr><th>Email</th><th>Phone</th><th>User name</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td></tr>"; //or just use "echo $row[0]"
+            }
+
+            echo "</table>";
+        }
+
+        function printResult4($result) {
+            echo "<br>All employees:<br>";
+            echo "<table>";
+            echo "<tr><th>Email</th><th>Phone</th><th>User name</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
                 echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td></tr>"; //or just use "echo $row[0]"
@@ -299,6 +334,22 @@
             $result = executePlainSQL("SELECT Applications_Completes.appID, Applications_For.jobID, Applications_Completes.intro, Applications_Completes.email FROM Applications_For, Applications_Completes WHERE Applications_For.appID = Applications_Completes.appID");
             // var_dump($result);
             echo printResult2($result);
+        }
+
+        function handleCountRequest3() {
+            global $db_conn;
+
+            $result = executePlainSQL("SELECT Users.email, phone, userName FROM Users, Employers WHERE Users.email = Employers.email");
+
+            echo printResult3($result);
+        }
+
+        function handleCountRequest4() {
+            global $db_conn;
+
+            $result = executePlainSQL("SELECT Users.email, phone, userName FROM Users, Employees WHERE Users.email = Employees.email");
+
+            echo printResult4($result);
         }
 
         function handleResetRequest() {
@@ -437,6 +488,10 @@
                     handleCountRequest1();
                 } else if (array_key_exists('AllApplications', $_GET)) {
                     handleCountRequest2();
+                } else if (array_key_exists('Employers', $_GET)) {
+                    handleCountRequest3();
+                } else if (array_key_exists('Employees', $_GET)) {
+                    handleCountRequest4();
                 }
 
                 disconnectFromDB();
@@ -457,7 +512,7 @@
 
         if (isset($_POST['reset']) || isset($_POST['insert'])) {
             handlePOSTRequest();
-        } else if (isset($_GET['countTupleRequest1']) || isset($_GET['countTupleRequest2'])) {
+        } else if (isset($_GET['countTupleRequest1']) || isset($_GET['countTupleRequest2']) || isset($_GET['countTupleRequest3']) || isset($_GET['countTupleRequest4'])) {
             handleGETRequest();
         }
 

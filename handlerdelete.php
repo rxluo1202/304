@@ -116,8 +116,15 @@
             $jobID = $_POST['jobID'];
             $email = $_POST['email'];
 
-            executePlainSQL("DELETE FROM Jobs_Posts WHERE jobID='" . $jobID . "' AND email='" . $email . "'");
-            OCICommit($db_conn);
+            $result = executePlainSQL("DELETE FROM Jobs_Posts WHERE jobID='" . $jobID . "' AND email='" . $email . "'");
+            $numRows = oci_num_rows($result);
+            if ($numRows == 0) {
+                echo "No such job found!";
+                // or you can use other methods to generate an alert such as JavaScript alert or a log file entry
+            } else {
+                OCICommit($db_conn);
+                echo "Job deleted successfully.";
+            }
         }
 
         function handleGETRequest() {
