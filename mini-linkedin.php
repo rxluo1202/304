@@ -416,6 +416,7 @@
                 disconnectFromDB();
             }
         }
+        
         function handlePOSTRequest() {
             if (connectToDB()) {
                 if (array_key_exists('resetTablesRequest', $_POST)) {
