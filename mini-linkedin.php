@@ -217,8 +217,8 @@
                 $success = False;
             }
 
-			return $statement;
-		}
+            return $statement;
+        }
 
         function printResult($result) {
             echo "<br>All the jobs:<br>";
