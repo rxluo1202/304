@@ -409,7 +409,7 @@
 
         function handleGETRequest() {
             if (connectToDB()) {
-                if(array_key_exists('AllJobs', $_GET)) {
+                if (array_key_exists('AllJobs', $_GET)) {
                     handleCountRequest();
                 }
 
