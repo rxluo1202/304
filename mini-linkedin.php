@@ -22,7 +22,7 @@
 
         <hr />
 
-        <h2>Show all jobs</h2>
+        <h2>View all jobs</h2>
         <form method="GET" action="mini-linkedin.php">
             <input type="hidden" id="countTupleRequest" name="countTupleRequest">
             <input type="submit" name="AllJobs"></p>
@@ -131,7 +131,7 @@
         <hr/>
 
         <!-- join -->
-        <h2>Find all applicants to a job</h2>
+        <h2>View all applicants to a job</h2>
         <form method="POST" action="handlerjoin.php"> 
             <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
             jobID: <input type="text" name="jobID"> <br /><br />
@@ -142,7 +142,7 @@
         <!-- division -->
         <h2>View the applicants of all jobs</h2>
         <form method="POST" action="handlerdivision.php"> 
-        <input type="submit" value="Check" name="insertDiv"> 
+        <input type="submit" name="insertDiv"> 
         </select>
         </form>
         <hr/>
@@ -226,7 +226,7 @@
             echo "<tr><th>jobID</th><th>Industry</th><th>Job name</th><th>Post date</th><th>End date</th><th>Employer email</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["jobID"] . "</td><td>" . $row["industry"] . "</td><td>" . $row["jobName"] . "</td><td>" . $row["postDate"] . "</td><td>" . $row["endDate"] . "</td><td>" . $row["email"] . "</td></tr>"; //or just use "echo $row[0]"
+                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td><td>" . $row[5] . "</td></tr>"; //or just use "echo $row[0]"
             }
 
             echo "</table>";
@@ -416,7 +416,7 @@
                 disconnectFromDB();
             }
         }
-        
+
         function handlePOSTRequest() {
             if (connectToDB()) {
                 if (array_key_exists('resetTablesRequest', $_POST)) {
