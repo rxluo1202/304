@@ -155,17 +155,19 @@
         <hr/>
 
         <!-- division -->
-        <h2>View the applicants of all jobs</h2>
+        <h2>View the applicants applied to all jobs of an employer</h2>
         <form method="POST" action="handlerdivision.php"> 
-        <input type="submit" name="insertDiv"> 
+        <input type="hidden" id="divQueryRequest" name="divQueryRequest">
+            Employer email: <input type="text" name="email"> <br /><br />
+        <input type="submit" value = "Search" name="divSubmit"> 
         </select>
         </form>
         <hr/>
 
         <!-- aggregation with group by -->
-        <h2><h2>View jobs that have applicants</h2></h2>
+        <h2><h2>View jobs and count of applicants of a specific employer</h2></h2>
         <form method="POST" action="handlerGroupby.php"> 
-        <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+        <input type="hidden" id="GBQueryRequest" name="GBQueryRequest">
         <select id="insGroupby" name="insGroupbyTable">
         <option value="count">Count</option>
         <input type="submit"  name="insertGB"> 
@@ -294,7 +296,8 @@
 
             // Your username is ora_(CWL_ID) and the password is a(student number). For example,
 			// ora_platypus is the username and a12345678 is the password.
-            $db_conn = OCILogon("ora_rxluo", "a65659203", "dbhost.students.cs.ubc.ca:1522/stu");
+            // $db_conn = OCILogon("ora_rxluo", "a65659203", "dbhost.students.cs.ubc.ca:1522/stu");
+            $db_conn = OCILogon("ora_echo1203", "a43994375", "dbhost.students.cs.ubc.ca:1522/stu");
 
             if ($db_conn) {
                 debugAlertMessage("Database is Connected");
