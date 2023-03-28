@@ -160,7 +160,6 @@
         <input type="hidden" id="divQueryRequest" name="divQueryRequest">
             Employer email: <input type="text" name="email"> <br /><br />
         <input type="submit" value = "Search" name="divSubmit"> 
-        </select>
         </form>
         <hr/>
 
@@ -168,6 +167,7 @@
         <h2><h2>View jobs and count of applicants of a specific employer</h2></h2>
         <form method="POST" action="handlerGroupby.php"> 
         <input type="hidden" id="GBQueryRequest" name="GBQueryRequest">
+        Employer email: <input type="text" name="email"> <br /><br />
         <select id="insGroupby" name="insGroupbyTable">
         <option value="count">Count</option>
         <input type="submit"  name="insertGB"> 
@@ -185,9 +185,9 @@
         <hr/>
 
         <!-- nested aggregation -->
-        <h2>View the latest jobs and the number of their applicants</h2>
+        <h2>View the latest jobs and the number of their applications</h2>
         <form method="POST" action="handlerNested.php"> 
-        <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+        <input type="hidden" id="nestQueryRequest" name="nestQueryRequest">
         <select id="insNested" name="insNestedTable">
         <option value="count">Count</option>
         <input type="submit"  name="insertNest"> 
