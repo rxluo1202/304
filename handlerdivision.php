@@ -116,7 +116,6 @@
             global $db_conn;
 
             $email = $_POST['email'];
-
             
             $result = executePlainSQL("SELECT DISTINCT u.userName 
             FROM Users u
@@ -134,7 +133,25 @@
                 ) AND jp.email = '" . $email . "'
             )
             ");
-            $numRows = oci_num_rows($result);
+            //$numRows = oci_num_rows($result);
+            $numRows = oci_fetch_all($result, $resultArray, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            //reset to original
+            $result = executePlainSQL("SELECT DISTINCT u.userName 
+            FROM Users u
+            WHERE NOT EXISTS (
+                SELECT jp.jobID 
+                FROM Jobs_Posts jp
+                WHERE NOT EXISTS (
+                    SELECT af.appID 
+                    FROM Applications_For af
+                    WHERE af.jobID = jp.jobID AND af.appID IN (
+                        SELECT ac.appID 
+                        FROM Applications_Completes ac
+                        WHERE ac.email = u.email
+                    )
+                ) AND jp.email = '" . $email . "'
+            )
+            ");
             if ($numRows == 0) {
                 echo "No such applicants found!";
                 // or you can use other methods to generate an alert such as JavaScript alert or a log file entry

@@ -55,9 +55,9 @@
 
 
         function printResult($result) {
-            echo "<br>Newest Jobs & Count of applications:<br>";
+            echo "<br>Jobs & Count of applications:<br>";
             echo "<table>";
-            echo "<tr><th>jobID</th><th>Applications Count</th></tr>";
+            echo "<tr><th>jobID</th><th>Count</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
                 echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td></tr>"; //or just use "echo $row[0]"
@@ -112,18 +112,21 @@
             // }
         }
 
-        function handleNestRequest() {
+        function handleHavRequest() {
             global $db_conn;
 
-            $result = executePlainSQL("SELECT Applications_For.jobID, COUNT(*) FROM Applications_For WHERE Applications_For.jobID IN (SELECT Jobs_Posts.jobID FROM Jobs_Posts WHERE postDate = (SELECT MAX(postDate) FROM Jobs_Posts)) GROUP BY jobID");
-            //$resultArray = OCI_Fetch_Array($result, OCI_BOTH);
+            //employer email
+            $cnt = $_POST['number'];
+
+            //var_dump($cnt);
+
+            $result = executePlainSQL("SELECT Applications_For.jobID, COUNT(*) FROM Applications_For GROUP BY Applications_For.jobID HAVING COUNT(*) >= '" . $cnt . "' ORDER BY Applications_For.jobID ASC");
             //$numRows = oci_num_rows($result);
             $numRows = oci_fetch_all($result, $resultArray, null, null, OCI_FETCHSTATEMENT_BY_ROW);
             //reset to original
-            $result = executePlainSQL("SELECT Applications_For.jobID, COUNT(*) FROM Applications_For WHERE Applications_For.jobID IN (SELECT Jobs_Posts.jobID FROM Jobs_Posts WHERE postDate = (SELECT MAX(postDate) FROM Jobs_Posts)) GROUP BY jobID");
-
+            $result = executePlainSQL("SELECT Applications_For.jobID, COUNT(*) FROM Applications_For GROUP BY Applications_For.jobID HAVING COUNT(*) >= '" . $cnt. "' ORDER BY Applications_For.jobID ASC");
             if ($numRows == 0) {
-                echo "No such newest jobs or applications found!";
+                echo "No such jobs and applications found!";
                 // or you can use other methods to generate an alert such as JavaScript alert or a log file entry
             } else {
                 echo printResult($result);
@@ -143,15 +146,15 @@
 
         function handlePOSTRequest() {
             if (connectToDB()) {
-                if (array_key_exists('nestQueryRequest', $_POST)) {
-                    handleNestRequest();
+                if (array_key_exists('havQueryRequest', $_POST)) {
+                    handleHavRequest();
                 }
 
                 disconnectFromDB();
             }
         }
 
-        if (isset($_POST['insertNest'])) {
+        if (isset($_POST['insertHav'])) {
             handlePOSTRequest();
         } else if (isset($_GET['countTupleRequest'])) {
             handleGETRequest();

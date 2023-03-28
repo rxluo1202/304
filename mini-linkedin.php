@@ -176,9 +176,9 @@
         <hr/>
 
         <!-- aggregation with group by & having -->
-        <h2>View jobs that have no fewer than some applicants</h2>
+        <h2>View jobs that have no fewer than some applications</h2>
         <form method="POST" action="handlerHaving.php"> 
-        <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+        <input type="hidden" id="havQueryRequest" name="havQueryRequest">
         Number of applicants: <input type="text" name="number"> <br /><br />
         <input type="submit"  name="insertHav"> 
         </form>

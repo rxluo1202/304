@@ -117,9 +117,16 @@
 
             //employer email
             $email = $_POST['email'];
-
+            //SQL no problem
             $result = executePlainSQL("SELECT Applications_For.jobID, COUNT(*) FROM Applications_For, Jobs_Posts WHERE Applications_For.jobID = Jobs_Posts.jobID AND Jobs_Posts.email = '" . $email . "' GROUP BY Applications_For.jobID");
-            $numRows = oci_num_rows($result);
+            $numRows = oci_fetch_all($result, $resultArray, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            //$numRows = oci_num_rows($result);
+            // echo "Number of rows: $numRows";
+            // echo "Employer email: $email";
+
+            //reset to previous
+            $result = executePlainSQL("SELECT Applications_For.jobID, COUNT(*) FROM Applications_For, Jobs_Posts WHERE Applications_For.jobID = Jobs_Posts.jobID AND Jobs_Posts.email = '" . $email . "' GROUP BY Applications_For.jobID");
+            
             if ($numRows == 0) {
                 echo "No such jobs and applications found!";
                 // or you can use other methods to generate an alert such as JavaScript alert or a log file entry
